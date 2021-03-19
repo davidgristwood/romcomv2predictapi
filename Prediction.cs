@@ -52,7 +52,7 @@ namespace romcom
 
         [FunctionName("Predict")]
         public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] HttpRequest req, ILogger log)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req, ILogger log)
         {
             log.LogInformation("** C# HTTP trigger function processed a request.");
 
@@ -98,7 +98,7 @@ namespace romcom
                 }
             }
             string json = JsonConvert.SerializeObject(genreResults);
-            log.LogInformation($"** Predicts are {json}");
+            log.LogInformation($"**  Predicts are {json}");
 
             return new OkObjectResult(json);
         }

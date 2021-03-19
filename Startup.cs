@@ -34,10 +34,12 @@ namespace romcom
 
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            // AddPredictionEnginePool<Input,Output>()
+            // default is github project - "https://github.com/davidgristwood/romcomv2predictapi/raw/master/MLModels/onnxmlmodel.zip"
+            string uri = Environment.GetEnvironmentVariable("MODELURI");
+            Console.WriteLine($"model uri {uri}");
             builder.Services.AddPredictionEnginePool<OnnxInput, OnnxOutput>()
-                    .FromFile(modelName: "RomComModel", filePath: _modelPath, watchForChanges: true);
-                    //.FromUri(modelName: "RomComModel", "https://github.com/davidgristwood/romcomv2/blob/main/MLModels/onnxmlmodel.zip");
+                    .FromUri(modelName: "RomComModel", uri);
+                    
         }
     }
 }
